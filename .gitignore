@@ -1,0 +1,35 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+
+# User-specific files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Build outputs
+target/
+build/
+dist/
+classes/
+
+# Maven
+log/
+.mvn/timing.properties
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
