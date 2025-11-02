@@ -1,5 +1,7 @@
 package org.iut.refactoring;
 
+import org.iut.refactoring.rapport.TypeRapport;
+
 import java.util.UUID;
 
 class   GestionApp {
@@ -16,8 +18,7 @@ class   GestionApp {
         System.out.println("Salaire de Alice: " + app.employes.get(0).calculSalaire() + " €");
         System.out.println("Bonus de Alice: " + app.employes.get(0).calculBonusAnnuel() + " €");
 
-        app.generationRapport("SALAIRE", "IT");
-        app.generationRapport("EQUIPE", null);
+        app.generationRapport(TypeRapport.SALAIRE, "IT");
 
         app.avancementEmploye(aliceId, TypeEmploye.CHEF_PROJET);
 

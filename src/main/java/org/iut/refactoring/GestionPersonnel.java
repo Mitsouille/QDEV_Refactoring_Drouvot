@@ -1,5 +1,9 @@
 package org.iut.refactoring;
 
+import org.iut.refactoring.rapport.RapportFactory;
+import org.iut.refactoring.rapport.RapportStrategy;
+import org.iut.refactoring.rapport.TypeRapport;
+
 import java.util.*;
 import java.time.*;
 
@@ -13,37 +17,10 @@ public class GestionPersonnel {
         logs.add(LocalDateTime.now() + " - Ajout de l'employé: " + emp.getNom());
     }
 
-    public void generationRapport(String typeRapport, String filtre) {
+    public void generationRapport(TypeRapport typeRapport, String filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
-
-        if (typeRapport.equals("SALAIRE")) {
-            for (Employe emp: employes) {
-                if (filtre == null || filtre.isEmpty() ||
-                        emp.getEquipe().equals(filtre)) {
-                    String nom = emp.getNom();
-                    double salaire = emp.calculSalaire();
-                    System.out.println(nom + ": " + salaire + " €");
-                }
-            }
-        } else if (typeRapport.equals("EXPERIENCE")) {
-            for (Employe emp : employes) {
-                if (filtre == null || filtre.isEmpty() ||
-                        emp.getEquipe().equals(filtre)) {
-                    String nom = emp.getNom();
-                    int exp = emp.getExperience();
-                    System.out.println(nom + ": " + exp + " années");
-                }
-            }
-        } else if (typeRapport.equals("DIVISION")) {
-            HashMap<String, Integer> compteurDivisions = new HashMap<>();
-            for (Employe emp : employes) {
-                String div = emp.getEquipe();
-                compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
-            }
-            for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
-                System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
-            }
-        }
+        RapportStrategy strategy = RapportFactory.create(typeRapport);
+        strategy.generer(employes, filtre);
         logs.add(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
     }
 

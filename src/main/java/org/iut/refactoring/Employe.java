@@ -1,5 +1,8 @@
 package org.iut.refactoring;
 
+import org.iut.refactoring.salaire.SalaireStrategy;
+import org.iut.refactoring.salaire.SalaireStrategyFactory;
+
 import java.util.UUID;
 
 public class Employe {

@@ -1,4 +1,4 @@
-package org.iut.refactoring;
+package org.iut.refactoring.salaire;
 
 public interface SalaireStrategy {
     double calculerSalaire(double base, int exp);
