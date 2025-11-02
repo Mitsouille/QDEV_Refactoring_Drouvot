@@ -20,7 +20,6 @@ public class GestionPersonnel {
             for (Employe emp: employes) {
                 if (filtre == null || filtre.isEmpty() ||
                         emp.getEquipe().equals(filtre)) {
-                    UUID id = emp.getId();
                     String nom = emp.getNom();
                     double salaire = emp.calculSalaire();
                     System.out.println(nom + ": " + salaire + " €");
@@ -78,37 +77,6 @@ public class GestionPersonnel {
         for (String log : logs) {
             System.out.println(log);
         }
-    }
-
-    public double calculBonusAnnuel(UUID employeId) {
-        Employe emp = null;
-        for (Employe e : employes) {
-            if (e.getId().equals(employeId)) {
-                emp = e;
-                break;
-            }
-        }
-        if (emp == null) return 0;
-
-        TypeEmploye type = emp.getType();
-        int experience = emp.getExperience();
-        double salaireDeBase = emp.getSalaireDeBase();
-
-        double bonus = 0;
-        if (type == TypeEmploye.DEVELOPPER) {
-            bonus = salaireDeBase * 0.1;
-            if (experience > 5) {
-                bonus = bonus * 1.5;
-            }
-        } else if (type == TypeEmploye.CHEF_PROJET) {
-            bonus = salaireDeBase * 0.2;
-            if (experience > 3) {
-                bonus = bonus * 1.3;
-            }
-        } else if (type == TypeEmploye.STAGIAIRE) {
-            bonus = 0; // Pas de bonus
-        }
-        return bonus;
     }
 }
 

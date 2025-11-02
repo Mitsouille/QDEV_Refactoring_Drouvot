@@ -11,6 +11,7 @@ public class Employe {
     private int experience;
     private String equipe;
     private double salaire;
+    private SalaireStrategy salaireStrategy;
 
     public Employe(TypeEmploye type, String nom, double salaireDeBase, int experience, String equipe) {
         id = UUID.randomUUID();
@@ -19,37 +20,18 @@ public class Employe {
         this.salaireDeBase = salaireDeBase;
         this.nom = nom;
         this.type = type;
+        this.salaireStrategy = SalaireStrategyFactory.create(type);
         this.salaire = this.calculSalaire();
     }
 
 
     public double calculSalaire() {
-        TypeEmploye type = this.getType();
-        double salaireDeBase = this.getSalaireDeBase();
-        int experience = this.getExperience();
+        return salaireStrategy.calculerSalaire(this.salaireDeBase, this.experience);
+    }
 
-        double salaireFinal = salaireDeBase;
-        if (TypeEmploye.DEVELOPPER == type) {
-            salaireFinal = salaireDeBase * 1.2;
-            if (experience > 5) {
-                salaireFinal = salaireFinal * 1.15;
-            }
-            if (experience > 10) {
-                salaireFinal = salaireFinal * 1.05; // bonus
-            }
-        } else if (type == TypeEmploye.CHEF_PROJET) {
-            salaireFinal = salaireDeBase * 1.5;
-            if (experience > 3) {
-                salaireFinal = salaireFinal * 1.1;
-            }
-            salaireFinal = salaireFinal + 5000; // bonus
-        } else if (type == TypeEmploye.STAGIAIRE) {
-            salaireFinal = salaireDeBase * 0.6;
-            // Pas de bonus pour les stagiaires
-        } else {
-            salaireFinal = salaireDeBase;
-        }
-        return salaireFinal;
+
+    public double calculBonusAnnuel() {
+        return salaireStrategy.calculerBonus(this.salaireDeBase, this.experience);
     }
 
     public UUID getId() {
@@ -60,7 +42,7 @@ public class Employe {
         return type;
     }
 
-    public void setType(TypeEmploye type){
+    public void setType(TypeEmploye type) {
         this.type = type;
     }
 

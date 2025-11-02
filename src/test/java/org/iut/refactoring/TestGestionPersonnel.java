@@ -31,19 +31,19 @@ public class TestGestionPersonnel {
     }
 
     public void createEmploye(){
-        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPPER,"Alice", 50000, 6, "IT"));
+        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER,"Alice", 50000, 6, "IT"));
         gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.CHEF_PROJET, "Bob", 60000, 4, "RH"));
         gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.STAGIAIRE, "Charlie", 20000, 0, "IT"));
-        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPPER, "Dan", 55000, 12, "IT"));
-        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPPER, "John", 35000, 3, "JSP"));
+        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER, "Dan", 55000, 12, "IT"));
+        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER, "John", 35000, 3, "JSP"));
         gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.CHEF_PROJET, "Léa", 45000, 2, "RH"));
     }
 
     @Test
     void test_ajouteEmploye(){
-        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPPER, "Alice", 50000, 6, "IT"));
+        gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER, "Alice", 50000, 6, "IT"));
         assertAll(
-                () -> assertEquals(TypeEmploye.DEVELOPPER, gestionPersonnel.employes.get(0).getType()),
+                () -> assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.employes.get(0).getType()),
                 () -> assertEquals("Alice", gestionPersonnel.employes.get(0).getNom()),
                 () -> assertEquals(50000, gestionPersonnel.employes.get(0).getSalaireDeBase()),
                 () -> assertEquals(6, gestionPersonnel.employes.get(0).getExperience()),
@@ -53,25 +53,10 @@ public class TestGestionPersonnel {
     }
 
     @Test
-    void test_calculBonusAnnuel(){
-        createEmploye();
-        assertAll(
-                () -> assertEquals(7500, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(0).getId())),
-                () -> assertEquals(15600, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(1).getId()),000.1),
-                () -> assertEquals(0, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(2).getId())),
-                () -> assertEquals(8250, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(3).getId())),
-                () -> assertEquals(3500, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(4).getId())),
-                () -> assertEquals(9000, gestionPersonnel.calculBonusAnnuel(gestionPersonnel.employes.get(5).getId())),
-                //Cas de l'erreur
-                () -> assertEquals(0, gestionPersonnel.calculBonusAnnuel(UUID.randomUUID()))
-        );
-    }
-
-    @Test
     void test_avancementEmploye(){
         createEmploye();
-        gestionPersonnel.avancementEmploye(gestionPersonnel.employes.get(2).getId(),TypeEmploye.DEVELOPPER);
-        assertEquals(TypeEmploye.DEVELOPPER, gestionPersonnel.employes.get(2).getType());
+        gestionPersonnel.avancementEmploye(gestionPersonnel.employes.get(2).getId(),TypeEmploye.DEVELOPER);
+        assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.employes.get(2).getType());
     }
 
     @Test

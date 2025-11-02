@@ -1,7 +1,7 @@
 package org.iut.refactoring;
 
 public enum TypeEmploye {
-    DEVELOPPER("DEVELOPPEUR"),
+    DEVELOPER("DEVELOPPEUR"),
     STAGIAIRE("STAGIAIRE"),
     CHEF_PROJET("CHEF DE PROJET");
 
