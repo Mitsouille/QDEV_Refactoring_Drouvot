@@ -41,12 +41,12 @@ public class TestEmploye {
     void test_calculSalaire(){
         createEmploye();
         assertAll(
-                () -> assertEquals(69000, gestionPersonnel.employes.get(0).calculSalaire()),
-                () -> assertEquals(104000, gestionPersonnel.employes.get(1).calculSalaire(),000.1),
-                () -> assertEquals(12000, gestionPersonnel.employes.get(2).calculSalaire()),
-                () -> assertEquals(79695, gestionPersonnel.employes.get(3).calculSalaire()),
-                () -> assertEquals(42000, gestionPersonnel.employes.get(4).calculSalaire()),
-                () -> assertEquals(72500, gestionPersonnel.employes.get(5).calculSalaire())
+                () -> assertEquals(69000, gestionPersonnel.getEmployes().get(0).calculSalaire()),
+                () -> assertEquals(104000, gestionPersonnel.getEmployes().get(1).calculSalaire(),000.1),
+                () -> assertEquals(12000, gestionPersonnel.getEmployes().get(2).calculSalaire()),
+                () -> assertEquals(79695, gestionPersonnel.getEmployes().get(3).calculSalaire()),
+                () -> assertEquals(42000, gestionPersonnel.getEmployes().get(4).calculSalaire()),
+                () -> assertEquals(72500, gestionPersonnel.getEmployes().get(5).calculSalaire())
         );
     }
 
@@ -54,12 +54,12 @@ public class TestEmploye {
     void test_calculBonusAnnuel(){
         createEmploye();
         assertAll(
-                () -> assertEquals(7500, gestionPersonnel.employes.get(0).calculBonusAnnuel()),
-                () -> assertEquals(15600, gestionPersonnel.employes.get(1).calculBonusAnnuel(),000.1),
-                () -> assertEquals(0, gestionPersonnel.employes.get(2).calculBonusAnnuel()),
-                () -> assertEquals(8250, gestionPersonnel.employes.get(3).calculBonusAnnuel()),
-                () -> assertEquals(3500, gestionPersonnel.employes.get(4).calculBonusAnnuel()),
-                () -> assertEquals(9000, gestionPersonnel.employes.get(5).calculBonusAnnuel())
+                () -> assertEquals(7500, gestionPersonnel.getEmployes().get(0).calculBonusAnnuel()),
+                () -> assertEquals(15600, gestionPersonnel.getEmployes().get(1).calculBonusAnnuel(),000.1),
+                () -> assertEquals(0, gestionPersonnel.getEmployes().get(2).calculBonusAnnuel()),
+                () -> assertEquals(8250, gestionPersonnel.getEmployes().get(3).calculBonusAnnuel()),
+                () -> assertEquals(3500, gestionPersonnel.getEmployes().get(4).calculBonusAnnuel()),
+                () -> assertEquals(9000, gestionPersonnel.getEmployes().get(5).calculBonusAnnuel())
         );
     }
 }

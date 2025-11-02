@@ -45,20 +45,20 @@ public class TestGestionPersonnel {
     void test_ajouteEmploye(){
         gestionPersonnel.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER, "Alice", 50000, 6, "IT"));
         assertAll(
-                () -> assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.employes.get(0).getType()),
-                () -> assertEquals("Alice", gestionPersonnel.employes.get(0).getNom()),
-                () -> assertEquals(50000, gestionPersonnel.employes.get(0).getSalaireDeBase()),
-                () -> assertEquals(6, gestionPersonnel.employes.get(0).getExperience()),
-                () -> assertEquals("IT", gestionPersonnel.employes.get(0).getEquipe()),
-                () -> assertEquals(69000, gestionPersonnel.employes.get(0).getSalaire())
+                () -> assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.getEmployes().get(0).getType()),
+                () -> assertEquals("Alice", gestionPersonnel.getEmployes().get(0).getNom()),
+                () -> assertEquals(50000, gestionPersonnel.getEmployes().get(0).getSalaireDeBase()),
+                () -> assertEquals(6, gestionPersonnel.getEmployes().get(0).getExperience()),
+                () -> assertEquals("IT", gestionPersonnel.getEmployes().get(0).getEquipe()),
+                () -> assertEquals(69000, gestionPersonnel.getEmployes().get(0).getSalaire())
         );
     }
 
     @Test
     void test_avancementEmploye(){
         createEmploye();
-        gestionPersonnel.avancementEmploye(gestionPersonnel.employes.get(2).getId(),TypeEmploye.DEVELOPER);
-        assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.employes.get(2).getType());
+        gestionPersonnel.avancementEmploye(gestionPersonnel.getEmployes().get(2).getId(),TypeEmploye.DEVELOPER);
+        assertEquals(TypeEmploye.DEVELOPER, gestionPersonnel.getEmployes().get(2).getType());
     }
 
     @Test
@@ -115,9 +115,9 @@ public class TestGestionPersonnel {
         createEmploye();
         ArrayList<Employe> emp = gestionPersonnel.getEmployesParDivision("IT");
         assertAll(
-                () -> assertEquals(gestionPersonnel.employes.get(0), emp.get(0)),
-                () -> assertEquals(gestionPersonnel.employes.get(2), emp.get(1)),
-                () -> assertEquals(gestionPersonnel.employes.get(3), emp.get(2))
+                () -> assertEquals(gestionPersonnel.getEmployes().get(0), emp.get(0)),
+                () -> assertEquals(gestionPersonnel.getEmployes().get(2), emp.get(1)),
+                () -> assertEquals(gestionPersonnel.getEmployes().get(3), emp.get(2))
         );
     }
 
@@ -126,7 +126,7 @@ public class TestGestionPersonnel {
         createEmploye();
         gestionPersonnel.printLogs();
         String expected = "=== LOGS ===\r\n";
-        expected += String.join("\r\n",gestionPersonnel.logs);
+        expected += String.join("\r\n",gestionPersonnel.getlogManagers().getLogs());
         expected += "\r\n";
         assertEquals(expected,outContent.toString());
     }

@@ -13,10 +13,10 @@ class   GestionApp {
         app.ajouteSalarie(new Employe(TypeEmploye.STAGIAIRE, "Charlie", 20000, 0, "IT"));
         app.ajouteSalarie(new Employe(TypeEmploye.DEVELOPER, "Dan", 55000, 12, "IT"));
 
-        UUID aliceId = app.employes.get(0).getId();
+        UUID aliceId = app.getEmployes().get(0).getId();
 
-        System.out.println("Salaire de Alice: " + app.employes.get(0).calculSalaire() + " €");
-        System.out.println("Bonus de Alice: " + app.employes.get(0).calculBonusAnnuel() + " €");
+        System.out.println("Salaire de Alice: " + app.getEmployes().get(0).calculSalaire() + " €");
+        System.out.println("Bonus de Alice: " + app.getEmployes().get(0).calculBonusAnnuel() + " €");
 
         app.generationRapport(TypeRapport.SALAIRE, "IT");
 

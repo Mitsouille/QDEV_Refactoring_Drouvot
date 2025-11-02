@@ -47,6 +47,7 @@ public class Employe {
 
     public void setType(TypeEmploye type) {
         this.type = type;
+        this.salaireStrategy = SalaireStrategyFactory.create(type);
     }
 
     public String getNom() {

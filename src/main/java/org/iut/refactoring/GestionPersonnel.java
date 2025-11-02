@@ -9,19 +9,19 @@ import java.time.*;
 
 public class GestionPersonnel {
 
-    public ArrayList<Employe> employes = new ArrayList<>();
-    public ArrayList<String> logs = new ArrayList<>();
+    private ArrayList<Employe> employes = new ArrayList<>();
+    private LogManager logManager = new LogManager();
 
     public void ajouteSalarie(Employe emp) {
         employes.add(emp);
-        logs.add(LocalDateTime.now() + " - Ajout de l'employé: " + emp.getNom());
+        logManager.ajouterLog(LocalDateTime.now() + " - Ajout de l'employé: " + emp.getNom());
     }
 
     public void generationRapport(TypeRapport typeRapport, String filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
         RapportStrategy strategy = RapportFactory.create(typeRapport);
         strategy.generer(employes, filtre);
-        logs.add(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
+        logManager.ajouterLog(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
     }
 
     public void avancementEmploye(UUID employeId, TypeEmploye newType) {
@@ -31,7 +31,7 @@ public class GestionPersonnel {
                 emp.setType(newType);
                 emp.calculSalaire();
 
-                logs.add(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
+                logManager.ajouterLog(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
                 System.out.println("Employé promu avec succès!");
                 return;
             }
@@ -50,10 +50,15 @@ public class GestionPersonnel {
     }
 
     public void printLogs() {
-        System.out.println("=== LOGS ===");
-        for (String log : logs) {
-            System.out.println(log);
-        }
+        logManager.afficherLogs();
+    }
+
+    public ArrayList<Employe> getEmployes() {
+        return employes;
+    }
+
+    public LogManager getlogManagers() {
+        return logManager;
     }
 }
 
