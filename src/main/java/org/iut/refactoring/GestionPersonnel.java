@@ -34,47 +34,6 @@ public class GestionPersonnel {
         logs.add(LocalDateTime.now() + " - Ajout de l'employé: " + emp.getNom());
     }
 
-    public double calculSalaire(UUID employeId) {
-        Employe emp = null;
-        for (Employe e : employes) {
-            if (e.getId().equals(employeId)) {
-                emp = e;
-                break;
-            }
-        }
-        if (emp == null) {
-            System.out.println("ERREUR: impossible de trouver l'employé");
-            return 0;
-        }
-
-        TypeEmploye type = emp.getType();
-        double salaireDeBase = emp.getSalaireDeBase();
-        int experience = emp.getExperience();
-
-        double salaireFinal = salaireDeBase;
-        if (TypeEmploye.DEVELOPPER == type) {
-            salaireFinal = salaireDeBase * 1.2;
-            if (experience > 5) {
-                salaireFinal = salaireFinal * 1.15;
-            }
-            if (experience > 10) {
-                salaireFinal = salaireFinal * 1.05; // bonus
-            }
-        } else if (type == TypeEmploye.CHEF_PROJET) {
-            salaireFinal = salaireDeBase * 1.5;
-            if (experience > 3) {
-                salaireFinal = salaireFinal * 1.1;
-            }
-            salaireFinal = salaireFinal + 5000; // bonus
-        } else if (type == TypeEmploye.STAGIAIRE) {
-            salaireFinal = salaireDeBase * 0.6;
-            // Pas de bonus pour les stagiaires
-        } else {
-            salaireFinal = salaireDeBase;
-        }
-        return salaireFinal;
-    }
-
     public void generationRapport(String typeRapport, String filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
 
@@ -84,7 +43,7 @@ public class GestionPersonnel {
                         emp.getEquipe().equals(filtre)) {
                     UUID id = emp.getId();
                     String nom = emp.getNom();
-                    double salaire = calculSalaire(id);
+                    double salaire = emp.calculSalaire();
                     System.out.println(nom + ": " + salaire + " €");
                 }
             }
@@ -116,7 +75,7 @@ public class GestionPersonnel {
                 emp.setType(newType);
 
                 double baseSalary = emp.getSalaireDeBase();
-                double nouveauSalaire = calculSalaire(employeId);
+                double nouveauSalaire = emp.calculSalaire();
                 salairesEmployes.put(employeId, nouveauSalaire);
 
                 logs.add(LocalDateTime.now() + " - Employé promu: " + emp.getNom());

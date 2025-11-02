@@ -13,7 +13,7 @@ class   GestionApp {
 
         UUID aliceId = app.employes.get(0).getId();
 
-        System.out.println("Salaire de Alice: " + app.calculSalaire(aliceId) + " €");
+        System.out.println("Salaire de Alice: " + app.employes.get(0).calculSalaire() + " €");
         System.out.println("Bonus de Alice: " + app.calculBonusAnnuel(aliceId) + " €");
 
         app.generationRapport("SALAIRE", "IT");

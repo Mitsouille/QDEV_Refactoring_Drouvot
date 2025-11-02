@@ -10,6 +10,7 @@ public class Employe {
     private double salaireDeBase;
     private int experience;
     private String equipe;
+    private double salaire;
 
     public Employe(TypeEmploye type, String nom, double salaireDeBase, int experience, String equipe) {
         id = UUID.randomUUID();
@@ -18,6 +19,36 @@ public class Employe {
         this.salaireDeBase = salaireDeBase;
         this.nom = nom;
         this.type = type;
+    }
+
+
+    public double calculSalaire() {
+        TypeEmploye type = this.getType();
+        double salaireDeBase = this.getSalaireDeBase();
+        int experience = this.getExperience();
+
+        double salaireFinal = salaireDeBase;
+        if (TypeEmploye.DEVELOPPER == type) {
+            salaireFinal = salaireDeBase * 1.2;
+            if (experience > 5) {
+                salaireFinal = salaireFinal * 1.15;
+            }
+            if (experience > 10) {
+                salaireFinal = salaireFinal * 1.05; // bonus
+            }
+        } else if (type == TypeEmploye.CHEF_PROJET) {
+            salaireFinal = salaireDeBase * 1.5;
+            if (experience > 3) {
+                salaireFinal = salaireFinal * 1.1;
+            }
+            salaireFinal = salaireFinal + 5000; // bonus
+        } else if (type == TypeEmploye.STAGIAIRE) {
+            salaireFinal = salaireDeBase * 0.6;
+            // Pas de bonus pour les stagiaires
+        } else {
+            salaireFinal = salaireDeBase;
+        }
+        return salaireFinal;
     }
 
     public UUID getId() {
@@ -46,5 +77,9 @@ public class Employe {
 
     public String getEquipe() {
         return equipe;
+    }
+
+    public double getSalaire() {
+        return salaire;
     }
 }

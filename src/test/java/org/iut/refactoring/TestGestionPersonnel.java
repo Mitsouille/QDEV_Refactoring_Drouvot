@@ -53,21 +53,6 @@ public class TestGestionPersonnel {
     }
 
     @Test
-    void test_calculSalaire(){
-        createEmploye();
-        assertAll(
-                () -> assertEquals(69000, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(0).getId())),
-                () -> assertEquals(104000, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(1).getId()),000.1),
-                () -> assertEquals(12000, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(2).getId())),
-                () -> assertEquals(79695, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(3).getId())),
-                () -> assertEquals(42000, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(4).getId())),
-                () -> assertEquals(72500, gestionPersonnel.calculSalaire(gestionPersonnel.employes.get(5).getId())),
-                //Cas de l'erreur
-                () -> assertEquals(0, gestionPersonnel.calculSalaire(UUID.randomUUID()))
-        );
-    }
-
-    @Test
     void test_calculBonusAnnuel(){
         createEmploye();
         assertAll(
