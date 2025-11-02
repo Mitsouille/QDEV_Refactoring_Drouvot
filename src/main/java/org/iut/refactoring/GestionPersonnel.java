@@ -6,31 +6,10 @@ import java.time.*;
 public class GestionPersonnel {
 
     public ArrayList<Employe> employes = new ArrayList<>();
-    public HashMap<UUID, Double> salairesEmployes = new HashMap<>();
     public ArrayList<String> logs = new ArrayList<>();
 
     public void ajouteSalarie(Employe emp) {
-
         employes.add(emp);
-
-        double salaireFinal = emp.getSalaireDeBase();
-        TypeEmploye type = emp.getType();
-        if (type == TypeEmploye.DEVELOPPER) {
-            salaireFinal = emp.getSalaireDeBase() * 1.2;
-            if (emp.getExperience() > 5) {
-                salaireFinal = salaireFinal * 1.15;
-            }
-        } else if (type == TypeEmploye.CHEF_PROJET) {
-            salaireFinal = emp.getSalaireDeBase() * 1.5;
-            if (emp.getExperience() > 3) {
-                salaireFinal = salaireFinal * 1.1;
-            }
-        } else if (type == TypeEmploye.STAGIAIRE) {
-            salaireFinal = emp.getSalaireDeBase() * 0.6;
-        }
-
-        salairesEmployes.put(emp.getId(), salaireFinal);
-
         logs.add(LocalDateTime.now() + " - Ajout de l'employé: " + emp.getNom());
     }
 
@@ -70,13 +49,11 @@ public class GestionPersonnel {
     }
 
     public void avancementEmploye(UUID employeId, TypeEmploye newType) {
+
         for (Employe emp : employes) {
             if (emp.getId().equals(employeId)) {
                 emp.setType(newType);
-
-                double baseSalary = emp.getSalaireDeBase();
-                double nouveauSalaire = emp.calculSalaire();
-                salairesEmployes.put(employeId, nouveauSalaire);
+                emp.calculSalaire();
 
                 logs.add(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
                 System.out.println("Employé promu avec succès!");

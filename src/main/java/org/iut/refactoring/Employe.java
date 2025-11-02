@@ -19,6 +19,7 @@ public class Employe {
         this.salaireDeBase = salaireDeBase;
         this.nom = nom;
         this.type = type;
+        this.salaire = this.calculSalaire();
     }
 
 

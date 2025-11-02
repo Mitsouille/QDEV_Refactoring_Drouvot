@@ -48,7 +48,7 @@ public class TestGestionPersonnel {
                 () -> assertEquals(50000, gestionPersonnel.employes.get(0).getSalaireDeBase()),
                 () -> assertEquals(6, gestionPersonnel.employes.get(0).getExperience()),
                 () -> assertEquals("IT", gestionPersonnel.employes.get(0).getEquipe()),
-                () -> assertEquals(69000, gestionPersonnel.salairesEmployes.get(gestionPersonnel.employes.get(0).getId()))
+                () -> assertEquals(69000, gestionPersonnel.employes.get(0).getSalaire())
         );
     }
 
